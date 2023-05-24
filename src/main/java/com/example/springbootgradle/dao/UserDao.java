@@ -7,11 +7,11 @@ import java.util.Map;
 
 import static java.lang.System.getenv;
 
-public abstract class UserDao {
+public class UserDao {
     ConnectionMaker connectionMaker;
 
-    public UserDao() {
-        this.connectionMaker = new DConnectionMaker();
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
     }
 
 
@@ -54,18 +54,4 @@ public abstract class UserDao {
         return user;
     }
 
-    public static void main (String[]args) throws SQLException, ClassNotFoundException {
-        UserDao userDao = new NUserDao();
-        User user = new User();
-        user.setId("3");
-        user.setName("고등어");
-        user.setPassword("123");
-        userDao.add(user);
-
-        User selectedUser = userDao.get("1");
-        System.out.println(selectedUser.getId());
-        System.out.println(selectedUser.getName());
-        System.out.println(selectedUser.getPassword());
-
-    }
 }
